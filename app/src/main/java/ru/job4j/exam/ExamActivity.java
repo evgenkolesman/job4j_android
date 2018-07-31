@@ -1,5 +1,6 @@
 package ru.job4j.exam;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ExamActivity extends AppCompatActivity {
+
+    public static final String HINT_FOR = "hint_for";
 
     private final List<Question> questions = Arrays.asList(
             new Question(
@@ -65,6 +68,17 @@ public class ExamActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         position--;
                         fillForm();
+                    }
+                }
+        );
+        Button hint = findViewById(R.id.hint);
+        hint.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(ExamActivity.this, HintActivity.class);
+                        intent.putExtra(HINT_FOR, position);
+                        startActivity(intent);
                     }
                 }
         );
